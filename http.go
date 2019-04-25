@@ -27,7 +27,7 @@ func ForHTTP(w http.ResponseWriter, r *http.Request) (*Escaper, io.Closer) {
 		encoding := httputil.NegotiateContentEncoding(r, []string{"br", "gzip"})
 		switch encoding {
 		case "br":
-			bw := brotli.NewWriter(dest, brotli.WriterOptions{Quality: 5})
+			bw := brotli.NewWriter(dest)
 			dest = bw
 			closer = bw
 			w.Header().Set("Content-Encoding", "br")
