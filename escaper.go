@@ -159,3 +159,10 @@ func (e *Escaper) Print(args ...interface{}) error {
 // A List is a prepared argument list for Escaper.Print. It can be nested
 // within another call to Print.
 type List []interface{}
+
+// Write bypasses the escaper, and writes directly to the underlying Writer.
+// This is useful if part of your page is rendered with templates, or some
+// other library that expects a Writer.
+func (e *Escaper) Write(p []byte) (n int, err error) {
+	return e.w.Write(p)
+}
